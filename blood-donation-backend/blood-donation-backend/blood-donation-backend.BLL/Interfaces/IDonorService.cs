@@ -9,5 +9,7 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Interfaces
         Task<DonorModel> GetById(Guid id);
 
         Task UpdateById(DonorModel donor);
+        Task<List<PatientModel>> GetPatientsOfDonors(Guid donorId);
+        Task<List<DonorModel>> GetDonorsByBloodType(string bloodType);
     }
 }

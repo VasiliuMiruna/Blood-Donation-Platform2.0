@@ -2,6 +2,7 @@
 using blood_donation_backend.blood_donation_backend.DAL.Interfaces;
 using blood_donation_backend.Data;
 using blood_donation_backend.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
@@ -90,6 +91,7 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
             };
         }
 
+        
         public async Task DeletePatient(Guid id)
         {
             // Query the database for the rows to be deleted.
@@ -125,6 +127,14 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
             _db.Remove(patient);
             _db.SaveChanges();
 */
+        }
+        public async Task<List<Medicine>> GetMedicinesByPatientId(Guid patientId)
+        {
+            var medicines = await _db.PatientMedicines
+                .Where(pm => pm.PatientId == patientId)
+                .Select(pm => pm.Medicine)
+                .ToListAsync();
+            return medicines;
         }
     }
 }

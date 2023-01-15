@@ -20,7 +20,9 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Models
 
         public string? PhoneNumber { get; set; }
 
-      
+        public Guid? DonorId { get; set; }
+
+        public IList<MedicineModel> Medicines { get; set; }
 
 
        

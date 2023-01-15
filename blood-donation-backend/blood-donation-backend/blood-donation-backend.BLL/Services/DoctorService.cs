@@ -68,6 +68,7 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
         public async Task UpdateById(DoctorModel doctor)
         {
             //var patient = _patientRepository.GetById(id);
+            //dau getbyid aici vf daca exista daca nu arunc eroare
             var doctordb = new Doctor
             {
                 DoctorId = doctor.Id,

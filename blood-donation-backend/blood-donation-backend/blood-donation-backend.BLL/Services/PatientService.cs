@@ -32,7 +32,8 @@ namespace blood_donation_backend.Services
                 Age = patient.Age,
                 BloodType = patient.BloodType,
                 Gender = patient.Gender,
-                PhoneNumber = patient.PhoneNumber
+                PhoneNumber = patient.PhoneNumber,
+                CurrentDonorId = patient.DonorId
             };
 
             await _patientRepository.Create(newPatient);
@@ -96,6 +97,24 @@ namespace blood_donation_backend.Services
 
 
         }
+        public async Task<List<MedicineModel>> GetMedicinesByPatientId(Guid patientId)
+        {
+            var medicines = await _patientRepository.GetMedicinesByPatientId(patientId);
+            var list = new List<MedicineModel>();
+            foreach(var medicine in medicines)
+            {
+                var medicineModel = new MedicineModel
+                {
+                    Id = medicine.MedicineId,
+                    Name = medicine.Name,
+                    ExpirationDate = medicine.ExpirationDate,
+                    Prospect = medicine.Prospect,
+                };
+                list.Add(medicineModel);
+            }
+            return list;
+        }
+
         public async Task DeleteById(Guid id)
         {
             //var patient = await _patientRepository.GetById(id);

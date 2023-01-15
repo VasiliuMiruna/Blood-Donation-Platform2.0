@@ -30,6 +30,8 @@ builder.Services.AddTransient<IDoctorService, DoctorService>();
 builder.Services.AddTransient<IDoctorRepository, DoctorRepository>();
 builder.Services.AddTransient<IDonorService, DonorService>();
 builder.Services.AddTransient<IDonorRepository, DonorRepository>();
+builder.Services.AddTransient<IMedicineService, MedicineService>();
+builder.Services.AddTransient<IMedicineRepository, MedicineRepository>();
 
 var app = builder.Build();
 

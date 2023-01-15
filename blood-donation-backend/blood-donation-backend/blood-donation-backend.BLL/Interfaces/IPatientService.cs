@@ -13,10 +13,12 @@ namespace blood_donation_backend.BLL.Interfaces
 
         Task UpdateById(PatientModel patient);
         Task DeleteById(Guid id);
-        /*   void Update(PatientModel patient);
-           void Delete(PatientModel patient);*/
+        Task<List<MedicineModel>> GetMedicinesByPatientId(Guid patientId);
+        
+            /*   void Update(PatientModel patient);
+               void Delete(PatientModel patient);*/
 
-        // Task<PatientModel> GetById(int id);
-        //Task Update(PatientModel patient);
-    }
+            // Task<PatientModel> GetById(int id);
+            //Task Update(PatientModel patient);
+        }
 }

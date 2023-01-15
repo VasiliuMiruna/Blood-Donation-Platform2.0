@@ -1,6 +1,8 @@
 ﻿using blood_donation_backend.blood_donation_backend.DAL.Interfaces;
 using blood_donation_backend.Data;
 using blood_donation_backend.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
 {
@@ -86,6 +88,23 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
                 
                 await _db.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<Patient>> GetPatientsOfDonors(Guid donorId)
+        {
+            var patientElements = await _db.Donors
+                    .Where(d => d.DonorId == donorId)
+                    .SelectMany(d => d.Patients)
+                    .ToListAsync();
+            return patientElements;
+        }
+
+        public async Task<List<Donor>> GetDonorsByBloodType(string bloodType)
+        {
+            var donors = await _db.Donors
+                .Where(d => d.BloodType == bloodType)
+                .ToListAsync();
+            return donors;
         }
     }
 }

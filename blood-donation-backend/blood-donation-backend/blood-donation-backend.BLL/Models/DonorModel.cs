@@ -16,5 +16,7 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Models
         public string? BloodType { get; set; }
 
         public string? Gender { get; set; }
+
+        //public ICollection<PatientModel>? Patients { get; set; }
     }
 }

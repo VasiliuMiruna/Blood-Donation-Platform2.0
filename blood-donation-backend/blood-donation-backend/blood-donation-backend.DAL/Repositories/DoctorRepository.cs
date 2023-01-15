@@ -2,6 +2,7 @@
 using blood_donation_backend.blood_donation_backend.DAL.Interfaces;
 using blood_donation_backend.Data;
 using blood_donation_backend.Entities;
+using System.Linq;
 
 namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
 {
@@ -23,27 +24,29 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
 
         public async Task<List<Doctor>> GetAll()
         {
-            var doctors = _db.Doctors;
-            var list = new List<Doctor>();
-            foreach (var doctor in doctors)
-            {
-                var doctorModel = new Doctor
-                {
-                    DoctorId = doctor.DoctorId,
-                    FirstName = doctor.FirstName,
-                    LastName = doctor.LastName,
-                    Age = doctor.Age,
-                    Salary = doctor.Salary
-                };
-                list.Add(doctorModel);
-            }
-            return list;
+            //return 
+            return _db.Doctors.ToList(); //scot si eu asyncul poate
+            /* var list = new List<Doctor>();
+             foreach (var doctor in doctors)
+             {
+                 var doctorModel = new Doctor
+                 {
+                     DoctorId = doctor.DoctorId,
+                     FirstName = doctor.FirstName,
+                     LastName = doctor.LastName,
+                     Age = doctor.Age,
+                     Salary = doctor.Salary
+                 };
+                 list.Add(doctorModel);
+             }
+             return list;*/
         }
 
         public async Task<Doctor> GetById(Guid id)
         {
+            return _db.Doctors.FirstOrDefault(d => d.DoctorId == id);  //si asta nu trb sa fie async 
+            /*var doctors = _db.Doctors.WhereClauses(id);
 
-            var doctors = _db.Doctors.WhereClauses(id);
             var doctordb = new Doctor();
             foreach (var doctor in doctors)
             {
@@ -54,7 +57,7 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
                 doctordb.Age = doctor.Age;
                 doctordb.Salary = doctor.Salary;
             }
-            return doctordb;
+            return doctordb;*/
         }
         /*   public void Delete(Patient patient)
            {
@@ -70,9 +73,12 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
 
         public async Task UpdateDoctor(Doctor doctor)
         {
-     
 
-            var newDoctor = _db.Doctors.Find(doctor.DoctorId);
+            //aici ar trb doar sa dea update
+            _db.Doctors.Update(doctor);
+            await _db.SaveChangesAsync();
+
+            /*var newDoctor = _db.Doctors.Find(doctor.DoctorId);
             if (newDoctor != null)
             {
                 newDoctor.FirstName = doctor.FirstName;
@@ -81,6 +87,9 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
                 newDoctor.Salary = doctor.Salary;
                 _db.SaveChangesAsync();
             }
+        }*/
+
+
         }
     }
 }

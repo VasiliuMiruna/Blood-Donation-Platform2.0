@@ -53,6 +53,15 @@ namespace blood_donation_backend.Controllers
         {
             await _patientService.DeleteById(id);
         }
+
+        [HttpGet("getMedicines")]
+        public async Task<List<MedicineModel>> GetMedicines([FromQuery] Guid id)
+        {
+            var medicineList =await _patientService.GetMedicinesByPatientId(id);
+            return medicineList;
+        }
+
+       
        
 
         /*   public static List<Patient> patients = new List<Patient>

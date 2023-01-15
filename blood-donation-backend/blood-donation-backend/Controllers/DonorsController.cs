@@ -46,6 +46,19 @@ namespace blood_donation_backend.Controllers
             await _donorService.UpdateById(donor);
         }
 
-        
+        [HttpGet("getPatientList")]
+        public async Task<List<PatientModel>> GetPatientList([FromQuery] Guid id)
+        {
+            var patients = await _donorService.GetPatientsOfDonors(id);
+            return patients;
+        }
+        [HttpGet("findDonorsByBloodType")]
+        public async Task<List<DonorModel>> FindDonors([FromQuery] string bloodType)
+        {
+            var donors = await _donorService.GetDonorsByBloodType(bloodType);
+            return donors;
+
+        }
+
     }
 }
