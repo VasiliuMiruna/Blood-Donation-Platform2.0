@@ -8,7 +8,8 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Interfaces
         Task<List<DoctorModel>> GetAll();
         Task<DoctorModel> GetById(Guid id);
 
-        Task UpdateById(DoctorModel doctor);
-       // Task DeleteById(Guid id);
+        Task<bool> UpdateById(Guid id, DoctorModel doctor);
+        Task<bool> DeleteDoctor(Guid id);
+     
     }
 }

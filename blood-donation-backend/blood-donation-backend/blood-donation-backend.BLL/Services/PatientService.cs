@@ -15,12 +15,6 @@ namespace blood_donation_backend.Services
             _patientRepository = patientRepository;
         }
 
-        /*public Patient GetPatientById(Guid Id)
-        {
-            var patient = _patientRepository
-                .
-        }*/
-
         public async Task Create(PatientModel patient)
         {
             patient.Id = new Guid();
@@ -68,6 +62,10 @@ namespace blood_donation_backend.Services
         public async Task<PatientModel> GetById(Guid id)
         {
             var patient = await (_patientRepository.GetById(id));
+            if (patient == null)
+            { 
+                return null;
+            }
             var patientModel = new PatientModel
              {
                     Id = patient.PatientId,
@@ -80,20 +78,21 @@ namespace blood_donation_backend.Services
              };
             return patientModel;
         }
-        public async Task UpdateById(PatientModel patient)
+        public async Task<bool> UpdateById(Guid id, PatientModel patient)
         {
-            //var patient = _patientRepository.GetById(id);
-            var patientdb = new Patient
+            var patientDb = await _patientRepository.GetById(id);
+            if (patientDb != null)
             {
-                PatientId = patient.Id,
-                FirstName = patient.FirstName,
-                LastName = patient.LastName,
-                Age = patient.Age,
-                BloodType = patient.BloodType,
-                Gender = patient.Gender
-            };
-            await _patientRepository.UpdatePatient(patientdb);
-            
+                patientDb.PatientId = id;
+                patientDb.FirstName = patient.FirstName;
+                patientDb.LastName = patient.LastName;
+                patientDb.Age = patient.Age;
+                patientDb.Gender = patient.Gender;
+                patientDb.BloodType = patient.BloodType;
+                return true;
+            }
+            else return false;
+
 
 
         }
@@ -115,42 +114,18 @@ namespace blood_donation_backend.Services
             return list;
         }
 
-        public async Task DeleteById(Guid id)
+        public async Task<bool> DeleteById(Guid id)
         {
-            //var patient = await _patientRepository.GetById(id);
-            //await _patientRepository.DeletePatient(Guid id);
+            var patientDb = await _patientRepository.GetById(id);
+            if (patientDb != null)
+            {
+                await _patientRepository.DeletePatient(patientDb);
+                return true;
+            }
+            else return false;
 
         }
-        /* public void Update(PatientModel patient)
-         {
-             var newPatient =
-         }*/
-
-
-
-        /* public void Delete(PatientModel patient)
-         {
-             throw new NotImplementedException();
-         }
- */
-
-        /* public async Task<List<string>> ModifyPatient()
-{
-//la o lista de donatori afisam 
-var patients = await _patientRepo.GetAll();
-var list = new List<string>();
-
-foreach (var patient in patients)
-{
-list.Add($" Patient First Name: {patient.FirstName}," +
-$"Patient Last Name: {patient.LastName}," +
-$"Patient Blood Type: {patient.BloodType}," +
-$"Patient Age: {patient.Age}," +
-$"Patient Gender: {patient.Gender}");
-}
-
-return list;
-}*/
+  
 
     }
 }

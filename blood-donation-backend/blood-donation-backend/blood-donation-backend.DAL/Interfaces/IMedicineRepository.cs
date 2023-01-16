@@ -6,5 +6,7 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Interfaces
     {
         Task Create(Medicine medicine);
         Task<List<Medicine>> GetAll();
+        Task<Medicine> GetById(Guid id);
+        Task DeleteMedicine(Medicine medicine);
     }
 }

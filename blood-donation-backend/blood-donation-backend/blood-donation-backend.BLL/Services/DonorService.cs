@@ -56,34 +56,49 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
         public async Task<DonorModel> GetById(Guid id)
         {
             var donor = await (_donorRepository.GetById(id));
+            if (donor == null)
+            {
+                return null;
+            }
             var donorModel = new DonorModel
             {
                 Id = donor.DonorId,
                 FirstName = donor.FirstName,
                 LastName = donor.LastName,
                 Age = donor.Age,
-                Gender = donor.Gender,
-                BloodType = donor.BloodType
+                BloodType= donor.BloodType,
+                Gender = donor.Gender
+                
 
             };
             return donorModel;
         }
-        public async Task UpdateById(DonorModel donor)
+        public async Task<bool> UpdateById(Guid id,DonorModel donor)
         {
-            //var patient = _patientRepository.GetById(id);
-            var donordb = new Donor
+            var donorDb = await _donorRepository.GetById(id);
+            if (donorDb != null)
             {
-                DonorId = donor.Id,
-                FirstName = donor.FirstName,
-                LastName = donor.LastName,
-                Age = donor.Age,
-                Gender = donor.Gender,
-                BloodType = donor.BloodType
-            };
-            await _donorRepository.UpdateDonor(donordb);
-
-
-
+                donorDb.DonorId = id;
+                donorDb.FirstName = donor.FirstName;
+                donorDb.LastName = donor.LastName;
+                donorDb.Age = donor.Age;
+                donorDb.BloodType = donor.BloodType;
+                donorDb.Gender = donor.Gender;
+                
+                await _donorRepository.UpdateDonor(donorDb);
+                return true;
+            }
+            else return false;
+        }
+        public async Task<bool> DeleteDonor(Guid id)
+        {
+            var donorDb = await _donorRepository.GetById(id);
+            if (donorDb != null)
+            {
+                await _donorRepository.DeleteDonor(donorDb);
+                return true;
+            }
+            else return false;
         }
 
         public async Task<List<PatientModel>> GetPatientsOfDonors(Guid donorId)

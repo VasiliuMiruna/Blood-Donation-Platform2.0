@@ -20,7 +20,6 @@ namespace blood_donation_backend.Controllers
         public async Task<IActionResult> Post([FromBody] DoctorModel doctor)
         {
             _doctorService.Create(doctor);
-            //await _doctorService.SaveChangesAsync();
             return Ok(doctor);
         }
 
@@ -31,19 +30,26 @@ namespace blood_donation_backend.Controllers
             return doctors;
         }
 
-        [HttpGet("byId")]
-        public async Task<DoctorModel> GetDoctor([FromQuery] Guid id)
+        [HttpGet("{id}")]
+        public async Task<DoctorModel> GetDoctor([FromRoute] Guid id)
         {
             var doctor = await _doctorService.GetById(id);
             return doctor;
 
 
         }
-        [HttpPut("updateDoctor")]
-        public async Task UpdateDoctor([FromQuery] Guid id, [FromBody] DoctorModel doctor)
+        [HttpPut("{id}")]
+        public async Task UpdateDoctor([FromRoute] Guid id, [FromBody] DoctorModel doctor)
         {
             doctor.Id = id;
-            await _doctorService.UpdateById(doctor);
+            await _doctorService.UpdateById(id, doctor);
         }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteDoctor([FromRoute] Guid id)
+        {
+            await _doctorService.DeleteDoctor(id);
+        }
+
     }
 }

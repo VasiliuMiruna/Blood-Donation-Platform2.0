@@ -8,6 +8,7 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Interfaces
         Task<List<Doctor>> GetAll();
         Task<Doctor> GetById(Guid id);
         Task UpdateDoctor(Doctor doctor);
-       // Task DeletePatient(Patient patient);
+        Task DeleteDoctor(Doctor doctor);
+       
     }
 }

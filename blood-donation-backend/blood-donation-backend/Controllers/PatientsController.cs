@@ -21,8 +21,7 @@ namespace blood_donation_backend.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PatientModel patient)
         {
-            _patientService.Create(patient);
-            //await _patientService.SaveChangesAsync();
+            await _patientService.Create(patient);
             return Ok(patient);
         }
 
@@ -33,93 +32,34 @@ namespace blood_donation_backend.Controllers
             return patients;
         }
 
-        [HttpGet("byId")]
-        public async Task<PatientModel> GetPatient([FromQuery]Guid id)
+        [HttpGet("{id}")]
+        public async Task<PatientModel> GetPatient([FromRoute]Guid id)
         {
             var patient = await _patientService.GetById(id);
             return patient;
 
 
         }
-        [HttpPut("updatePatient")]
-        public async Task UpdatePatient([FromQuery]Guid id, [FromBody]PatientModel patient)
+        [HttpPut("{id}")]
+        public async Task UpdatePatient([FromRoute]Guid id, [FromBody]PatientModel patient)
         {
             patient.Id = id;
-            await _patientService.UpdateById(patient);
+            await _patientService.UpdateById(id, patient);
         }
 
-        [HttpDelete("deletePatientById")]
-        public async Task DeletePatient([FromQuery]Guid id)
+        [HttpDelete("{id}")]
+        public async Task DeletePatient([FromRoute]Guid id)
         {
             await _patientService.DeleteById(id);
         }
 
-        [HttpGet("getMedicines")]
-        public async Task<List<MedicineModel>> GetMedicines([FromQuery] Guid id)
+        [HttpGet("medicines/{id}")]
+        public async Task<List<MedicineModel>> GetMedicines([FromRoute] Guid id)
         {
             var medicineList =await _patientService.GetMedicinesByPatientId(id);
             return medicineList;
         }
 
-       
-       
-
-        /*   public static List<Patient> patients = new List<Patient>
-           {
-               new Patient { FirstName = "Alex", LastName = "Brinza", Age = 19, BloodType = "O-" },
-               new Patient { FirstName = "Florin", LastName = "Mihalcea", Age = 25, BloodType = "A+" },
-               new Patient { FirstName = "Emanuel", LastName = "Radu", Age = 24, BloodType = "AB+" },
-               new Patient { FirstName = "Emanuel", LastName = "Radu", Age = 24, BloodType = "AB+" },
-               new Patient { FirstName = "Emanuel", LastName = "Andrei", Age = 24, BloodType = "AB+" }
-
-           };
-
-   */
-
-        /*  [HttpGet]
-          public List<Patient> Get()
-          {
-              return patients;
-          }*/
-        /*
-                [HttpGet("byId")]
-                public Patient GetById(int id)
-                {
-                    return patients.FirstOrDefault(x => x.Id == id);
-                }
-
-                [HttpGet("byId/{Id}")]
-
-                public Patient GetByIdInEndpoint(int id)
-                {
-                    return patients.FirstOrDefault(s => s.Id.Equals(id));
-                }
-
-                [HttpGet("filter/{firstName}/{age}")]
-
-                public List<Patient> GetWithFilters(string firstName, int age)
-                {
-                    return patients.Where(p=>p.FirstName.ToLower().Equals(firstName.ToLower()) && p.Age == age).ToList();
-                }*/
-
-        /*     [HttpGet("fromRouteWithId/{id}")]
-
-             public Patient GetFromRouteWithId([FromRoute] int id)
-             {
-                 Patient patient = patients.FirstOrDefault(p => p.Id.Equals(id));
-                 return patient;
-             }
-     */
-
-        //Create
-        /*  [HttpPost]
-          public IActionResult AddPatient(Patient patient)
-          {
-              if(patient != null)
-                  patients.Add(patient);
-              return Ok();
-          }
-  */
 
 
     }

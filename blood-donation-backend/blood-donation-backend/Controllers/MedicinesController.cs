@@ -29,5 +29,21 @@ namespace blood_donation_backend.Controllers
             var medicines = await _medicineService.GetAll();
             return medicines;
         }
+
+        [HttpGet("{id}")]
+        public async Task<MedicineModel> GetMedicineById([FromRoute] Guid id)
+        {
+            var medicine = await _medicineService.GetById(id);
+            return medicine;
+
+
+        }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteMedicine([FromRoute] Guid id)
+        {
+            await _medicineService.DeleteById(id);
+        }
+
     }
 }

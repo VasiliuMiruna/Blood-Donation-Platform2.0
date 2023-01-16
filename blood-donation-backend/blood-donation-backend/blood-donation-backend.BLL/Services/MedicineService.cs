@@ -45,5 +45,33 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
             }
             return list;
         }
+        public async Task<MedicineModel> GetById(Guid id)
+        {
+            var medicine = await (_medicineRepository.GetById(id));
+            if (medicine == null)
+            {
+                return null;
+            }
+            var medicineModel = new MedicineModel
+            {
+                Id = medicine.MedicineId,
+                Prospect = medicine.Prospect,
+                Name = medicine.Name,
+                ExpirationDate=medicine.ExpirationDate,
+
+            };
+            return medicineModel;
+        }
+        public async Task<bool> DeleteById(Guid id)
+        {
+            var medicineDb = await _medicineRepository.GetById(id);
+            if (medicineDb != null)
+            {
+                await _medicineRepository.DeleteMedicine(medicineDb);
+                return true;
+            }
+            else return false;
+
+        }
     }
 }

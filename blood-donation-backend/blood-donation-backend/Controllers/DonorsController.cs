@@ -20,7 +20,6 @@ namespace blood_donation_backend.Controllers
         public async Task<IActionResult> Post([FromBody] DonorModel donor)
         {
             _donorService.Create(donor);
-            //await _patientService.SaveChangesAsync();
             return Ok(donor);
         }
 
@@ -31,33 +30,39 @@ namespace blood_donation_backend.Controllers
             return donors;
         }
 
-        [HttpGet("byId")]
-        public async Task<DonorModel> GetPatient([FromQuery] Guid id)
+        [HttpGet("{id}")]
+        public async Task<DonorModel> GetDonorById([FromRoute] Guid id)
         {
             var donor = await _donorService.GetById(id);
             return donor;
 
 
         }
-        [HttpPut("updateDonor")]
-        public async Task UpdatePatient([FromQuery] Guid id, [FromBody] DonorModel donor)
+        [HttpPut("{id}")]
+        public async Task UpdateDonor([FromRoute] Guid id, [FromBody] DonorModel donor)
         {
             donor.Id = id;
-            await _donorService.UpdateById(donor);
+            await _donorService.UpdateById(id, donor);
         }
 
-        [HttpGet("getPatientList")]
-        public async Task<List<PatientModel>> GetPatientList([FromQuery] Guid id)
+        [HttpGet("patients/{id}")]
+        public async Task<List<PatientModel>> GetPatientList([FromRoute] Guid id)
         {
             var patients = await _donorService.GetPatientsOfDonors(id);
             return patients;
         }
-        [HttpGet("findDonorsByBloodType")]
-        public async Task<List<DonorModel>> FindDonors([FromQuery] string bloodType)
+        [HttpGet("bloodType/{bloodType}")]
+        public async Task<List<DonorModel>> FindDonors([FromRoute] string bloodType)
         {
             var donors = await _donorService.GetDonorsByBloodType(bloodType);
             return donors;
 
+        }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteDonor([FromRoute] Guid id)
+        {
+            await _donorService.DeleteDonor(id);
         }
 
     }

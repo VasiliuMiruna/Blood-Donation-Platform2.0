@@ -54,6 +54,10 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
         public async Task<DoctorModel> GetById(Guid id)
         {
             var doctor = await (_doctorRepository.GetById(id));
+            if(doctor == null)
+            {
+                return null;
+            }
             var doctorModel = new DoctorModel
             {
                 Id = doctor.DoctorId,
@@ -65,22 +69,31 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
             };
             return doctorModel;
         }
-        public async Task UpdateById(DoctorModel doctor)
+        public async Task<bool> UpdateById(Guid id, DoctorModel doctor)
         {
-            //var patient = _patientRepository.GetById(id);
-            //dau getbyid aici vf daca exista daca nu arunc eroare
-            var doctordb = new Doctor
+            var doctorDb = await _doctorRepository.GetById(id);
+            if(doctorDb != null)
             {
-                DoctorId = doctor.Id,
-                FirstName = doctor.FirstName,
-                LastName = doctor.LastName,
-                Age = doctor.Age,
-                Salary = doctor.Salary
-            };
-            await _doctorRepository.UpdateDoctor(doctordb);
+                doctorDb.DoctorId = id;
+                doctorDb.FirstName = doctor.FirstName;
+                doctorDb.LastName = doctor.LastName;
+                doctorDb.Age = doctor.Age;
+                doctorDb.Salary = doctor.Salary;
+                await _doctorRepository.UpdateDoctor(doctorDb);
+                return true;
+            }
+            else return false;
+        }
 
-
-
+        public async Task<bool> DeleteDoctor(Guid id)
+        {
+            var doctorDb = await _doctorRepository.GetById(id);
+            if (doctorDb != null)
+            {
+                await _doctorRepository.DeleteDoctor(doctorDb);
+                return true;
+            }
+            else return false;
         }
     }
 }

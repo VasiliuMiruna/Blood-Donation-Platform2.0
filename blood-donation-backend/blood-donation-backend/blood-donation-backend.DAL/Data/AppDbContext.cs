@@ -28,13 +28,15 @@ namespace blood_donation_backend.Data
             modelBuilder.Entity<Patient>()
                 .HasOne<Donor>(p => p.Donor)
                 .WithMany(d => d.Patients)
-                .HasForeignKey(p => p.CurrentDonorId);
+                .HasForeignKey(p => p.CurrentDonorId)
+                .OnDelete(DeleteBehavior.Cascade); 
 
             //one to many between Doctor - Test (A doctor can run multiple tests)
             modelBuilder.Entity<Test>()
                 .HasOne<Doctor>(t => t.Doctor)
                 .WithMany(d => d.Tests)
-                .HasForeignKey(t => t.DoctorId);
+                .HasForeignKey(t => t.DoctorId)
+                .OnDelete(DeleteBehavior.Cascade); 
 
             //one to one between Patient and Test
             modelBuilder.Entity<Patient>()
@@ -60,13 +62,15 @@ namespace blood_donation_backend.Data
             modelBuilder.Entity<PatientMedicine>()
                 .HasOne<Patient>(pm => pm.Patient)
                 .WithMany(p => p.PatientMedicines)
-                .HasForeignKey(pm => pm.PatientId);
+                .HasForeignKey(pm => pm.PatientId)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<PatientMedicine>()
                 .HasOne<Medicine>(pm => pm.Medicine)
                 .WithMany(p => p.PatientMedicines)
-                .HasForeignKey(pm => pm.MedicineId);
+                .HasForeignKey(pm => pm.MedicineId)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
 
@@ -80,13 +84,15 @@ namespace blood_donation_backend.Data
             modelBuilder.Entity<PatientDoctor>()
                 .HasOne<Patient>(pm => pm.Patient)
                 .WithMany(p => p.PatientDoctors)
-                .HasForeignKey(pm => pm.PatientId);
+                .HasForeignKey(pm => pm.PatientId)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<PatientDoctor>()
                 .HasOne<Doctor>(pm => pm.Doctor)
                 .WithMany(p => p.PatientDoctors)
-                .HasForeignKey(pm => pm.DoctorId);
+                .HasForeignKey(pm => pm.DoctorId)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
 

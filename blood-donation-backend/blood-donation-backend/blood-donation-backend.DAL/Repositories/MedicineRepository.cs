@@ -37,6 +37,19 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
             }
             return list;
         }
-        
+        public async Task<Medicine> GetById(Guid id)
+        {
+            return _db.Medicines.FirstOrDefault(p => p.MedicineId == id);
+
+
+        }
+
+        public async Task DeleteMedicine(Medicine medicine)
+        {
+            _db.Medicines.Remove(medicine);
+            await _db.SaveChangesAsync();
+
+        }
+
     }
 }
