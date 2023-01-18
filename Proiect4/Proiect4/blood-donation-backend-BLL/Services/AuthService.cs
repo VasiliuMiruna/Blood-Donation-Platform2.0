@@ -108,8 +108,8 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
                 {
                     var patient = new Patient
                     {
-                        FirstName = registerModel.Email,
-                        LastName = registerModel.Email,
+                        FirstName = registerModel.FirstName,
+                        LastName = registerModel.LastName,
                         User = user,
                         UserId = user.Id
 
