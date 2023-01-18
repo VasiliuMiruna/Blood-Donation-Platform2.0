@@ -1,27 +1,36 @@
-﻿using blood_donation_backend.blood_donation_backend.BLL.Interfaces;
+﻿using blood_donation_backend.BLL.Interfaces;
+using blood_donation_backend.blood_donation_backend.BLL.Interfaces;
 using blood_donation_backend.blood_donation_backend.BLL.Models;
 using blood_donation_backend.blood_donation_backend.DAL.Entities;
 using blood_donation_backend.blood_donation_backend.DAL.Interfaces;
 using blood_donation_backend.Entities;
 using Microsoft.AspNetCore.Identity;
+using Proiect4.blood_donation_backend_BLL.Interfaces;
+using Proiect4.blood_donation_backend_DAL.Interfaces;
 
 namespace blood_donation_backend.blood_donation_backend.BLL.Services
 {
     public class AuthService : IAuthService
     {
-        /*private readonly UserManager<AppUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenHelper _tokenHelper;
         private readonly IUnitofWork _unitOfWork;
+        private readonly IDoctorRepository _dotorRepository;
+        private readonly IDonorRepository _donorRepository;
+        private readonly IPatientRepository _patientRepository;
+        private readonly IAdminRepository _adminRepository;
 
         public AuthService(UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
-            ITokenHelper tokenHelper, IUnitofWork unitOfWork)
+            ITokenHelper tokenHelper, IUnitofWork unitOfWork, IDoctorRepository doctorRepository, IDonorRepository donorRepository, IPatientRepository patientRepository, IAdminRepository adminRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenHelper = tokenHelper;
             _unitOfWork = unitOfWork;
+            
+            
         }
 
         public async Task<LoginResult> Login(LoginModel loginModel)
@@ -56,25 +65,39 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
 
 
         }
-
-        public async Task<bool> Register(RegisterModel registerModel)
+        public async Task Register(RegisterModel registerModel)
         {
             var user = new AppUser
             {
                 Email = registerModel.Email,
                 UserName = registerModel.Email
+                
             };
             var result = await _userManager.CreateAsync(user, registerModel.Password);
 
-            if (result.Succeeded)
+                if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, registerModel.Role);
-                if (registerModel.Role == "Donator")
+                if(registerModel.Role == "Admin")
+                {
+                    var admin = new Admin
+                    {
+                        FirstName = registerModel.FirstName,
+                        LastName = registerModel.LastName,
+                        User = user,
+                        UserId = user.Id
+
+                    };
+
+                    await _unitOfWork.Admins.Create(admin);
+                }
+
+                else if (registerModel.Role == "Donor")
                 {
                     var donor = new Donor
                     {
-                        FirstName = registerModel.Email,
-                        LastName = registerModel.Email,
+                        FirstName = registerModel.FirstName,
+                        LastName = registerModel.LastName,
                         User = user,
                         UserId = user.Id
 
@@ -113,14 +136,14 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
                 }
 
                 await _unitOfWork.SaveChangesAsync();
-                return true;
+                
 
             }
             else
             {
-                return false;
+                throw new Exception(String.Join(",", result.Errors.Select(x => x.Code)));
             }
 
-        }*/
+        }
     }
 }

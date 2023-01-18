@@ -6,9 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace blood_donation_backend.Data
 {
-    public class AppDbContext : IdentityDbContext<AppUser, Role,string>
+    public class AppDbContext : IdentityDbContext<AppUser, IdentityRole, string>
+
     {
-        
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Donor> Donors { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
@@ -16,8 +17,7 @@ namespace blood_donation_backend.Data
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<PatientMedicine> PatientMedicines { get; set; }
         public DbSet<PatientDoctor> PatientDoctors { get; set; }
-        public DbSet<AppUser> AppUsers { get; set; }
-        public DbSet<Role> Roles { get; set; }
+       
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -28,6 +28,8 @@ namespace blood_donation_backend.Data
         {
             
             base.OnModelCreating(modelBuilder);
+
+         
 
             //one to many between Donor - Patient
             modelBuilder.Entity<Patient>()
@@ -55,6 +57,29 @@ namespace blood_donation_backend.Data
                 .HasOne<Test>(d => d.Test)
                 .WithOne(t => t.Donor)
                 .HasForeignKey<Test>(t => t.DonorId);
+
+            
+
+            modelBuilder.Entity<Donor>()
+                    .HasOne(d => d.User)
+                    .WithOne(au => au.Donor)
+                    .HasForeignKey<Donor>(d => d.UserId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Admin>()
+                    .HasOne(d => d.User)
+                    .WithOne(au => au.Admin)
+                    .HasForeignKey<Admin>(d => d.UserId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Doctor>()
+                    .HasOne(d => d.User)
+                    .WithOne(au => au.Doctor)
+                    .HasForeignKey<Doctor>(d => d.UserId)
+                    .OnDelete(DeleteBehavior.NoAction); ;
+            modelBuilder.Entity<Patient>()
+                    .HasOne(d => d.User)
+                    .WithOne(au => au.Patient)
+                    .HasForeignKey<Patient>(d => d.UserId)
+                    .OnDelete(DeleteBehavior.NoAction); ;
 
 
             //many to many between Patient and Medicine

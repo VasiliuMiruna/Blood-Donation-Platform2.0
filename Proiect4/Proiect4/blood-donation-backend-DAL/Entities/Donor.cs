@@ -24,8 +24,8 @@ namespace blood_donation_backend.Entities
 
        
         public Test? Test { get; set; }
-        /*public Guid UserId { get; set; }
-        public virtual AppUser User { get; set; }*/
+        public virtual string UserId { get; set; }
+        public virtual AppUser User { get; set; }
 
     }
 }

@@ -10,30 +10,37 @@ namespace blood_donation_backend.Controllers
 
     public class AuthController : ControllerBase
     {
-        /*    private readonly IAuthService _authService;
+        private readonly IAuthService _authService;
 
-            public AuthController(IAuthService authService)
-            {
-                _authService = authService;
+        public AuthController(IAuthService authService)
+        {
+            _authService = authService;
+        }
+
+        [HttpPost("Register")]
+
+
+        public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
+        {
+            try {
+                await _authService.Register(registerModel);
+                return Ok();
             }
-
-            [HttpPost("Register")]
-
-
-            public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
+            catch (Exception e)
             {
-                var result = await _authService.Register(registerModel);
-                return result ? Ok(result) : BadRequest("result");
+                return BadRequest(e.Message);
             }
+            
+        }
 
-            [HttpPost("Login")]
+        [HttpPost("Login")]
 
-            public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
-            {
-                var result = await _authService.Login(loginModel);
-                return result.Success ? Ok(result) : BadRequest("Failed to login");
-            }
+        public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
+        {
+            var result = await _authService.Login(loginModel);
+            return result.Success ? Ok(result) : BadRequest("Failed to login");
+        }
 
-        }*/
     }
 }
+

@@ -11,8 +11,8 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Entities
 
         [StringLength(70)]
         public string? LastName { get; set; }
-        /*public Guid UserId { get; set; }
-        public virtual AppUser User { get; set; }*/
+        public virtual string UserId { get; set; }
+        public virtual AppUser User { get; set; }
 
     }
 }

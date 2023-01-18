@@ -30,8 +30,8 @@ namespace blood_donation_backend.Entities
         public IList<PatientMedicine>? PatientMedicines { get; set; }
         public IList<PatientDoctor>? PatientDoctors { get; set; }
 
-        /*public Guid UserId { get; set; }
-        public virtual AppUser User { get; set; }*/
+        public virtual string UserId { get; set; }
+        public virtual AppUser User { get; set; }
 
 
 

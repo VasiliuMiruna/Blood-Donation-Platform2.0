@@ -21,8 +21,8 @@ namespace blood_donation_backend.Entities
         public ICollection<Test>? Tests { get; set; }
 
         public IList<PatientDoctor>? PatientDoctors { get; set; }
-       /* public Guid UserId { get; set; }
-        public virtual AppUser User { get; set; }*/
+        public string UserId { get; set; }
+        public virtual AppUser User { get; set; }
 
     }
 }

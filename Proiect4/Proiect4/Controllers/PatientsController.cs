@@ -2,6 +2,7 @@
 using blood_donation_backend.blood_donation_backend.BLL.Models;
 using blood_donation_backend.Data;
 using blood_donation_backend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,7 @@ namespace blood_donation_backend.Controllers
             return Ok(patient);
         }
 
+        [Authorize(Roles="Admin,Doctor")]
         [HttpGet]
         public async Task<List<PatientModel>> GetPatients()
         {
