@@ -16,14 +16,11 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenHelper _tokenHelper;
         private readonly IUnitofWork _unitOfWork;
-        private readonly IDoctorRepository _dotorRepository;
-        private readonly IDonorRepository _donorRepository;
-        private readonly IPatientRepository _patientRepository;
-        private readonly IAdminRepository _adminRepository;
+        
 
         public AuthService(UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
-            ITokenHelper tokenHelper, IUnitofWork unitOfWork, IDoctorRepository doctorRepository, IDonorRepository donorRepository, IPatientRepository patientRepository, IAdminRepository adminRepository)
+            ITokenHelper tokenHelper, IUnitofWork unitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;

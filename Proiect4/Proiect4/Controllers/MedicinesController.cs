@@ -21,7 +21,7 @@ namespace blood_donation_backend.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] MedicineModel medicine)
         {
-            _medicineService.Create(medicine);
+            await _medicineService.Create(medicine);
             return Ok(medicine);
         }
 

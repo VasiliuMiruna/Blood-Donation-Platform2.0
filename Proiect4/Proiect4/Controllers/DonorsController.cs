@@ -17,12 +17,12 @@ namespace blood_donation_backend.Controllers
             _donorService = donorService;
         }
 
-        [HttpPost]
+      /*  [HttpPost]
         public async Task<IActionResult> Post([FromBody] DonorModel donor)
         {
-            _donorService.Create(donor);
+            await _donorService.Create(donor);
             return Ok(donor);
-        }
+        }*/
 
         [Authorize(Roles = "Admin,Doctor")]
         [HttpGet]

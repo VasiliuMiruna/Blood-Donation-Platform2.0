@@ -18,18 +18,18 @@ namespace blood_donation_backend.Controllers
         }
 
         
-        [HttpPost]
+       /* [HttpPost]
         public async Task<IActionResult> Post([FromBody] DoctorModel doctor)
         {
-            _doctorService.Create(doctor);
+            await _doctorService.Create(doctor);
             return Ok(doctor);
-        }
+        }*/
 
-        [Authorize(Roles = "Admin,Doctor")]
+        //[Authorize(Roles = "Admin,Doctor")]
         [HttpGet]
-        public ActionResult GetDoctors()
+        public async Task<ActionResult> GetDoctors()
         {
-            var doctors =  _doctorService.GetAll();
+            var doctors =  await _doctorService.GetAll();
             return Ok(doctors);
         }
 

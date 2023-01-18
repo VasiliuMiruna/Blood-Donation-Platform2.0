@@ -19,12 +19,12 @@ namespace blood_donation_backend.Controllers
             _patientService = patientService;
         }
 
-        [HttpPost]
+     /*   [HttpPost]
         public async Task<IActionResult> Post([FromBody] PatientModel patient)
         {
             await _patientService.Create(patient);
             return Ok(patient);
-        }
+        }*/
 
         [Authorize(Roles="Admin,Doctor")]
         [HttpGet]

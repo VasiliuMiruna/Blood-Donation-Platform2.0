@@ -21,7 +21,7 @@ namespace Proiect4.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] TestModel test)
         {
-            _testService.Create(test);
+            await _testService.Create(test);
             return Ok(test);
         }
     }
