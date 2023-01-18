@@ -14,6 +14,8 @@ using Microsoft.Identity.Web;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Proiect4.blood_donation_backend_BLL.Helpers;
+using Proiect4.blood_donation_backend_BLL.Interfaces;
+using Proiect4.blood_donation_backend_BLL.Services;
 using Proiect4.blood_donation_backend_DAL;
 using Proiect4.blood_donation_backend_DAL.Interfaces;
 using Proiect4.blood_donation_backend_DAL.Repositories;
@@ -68,6 +70,8 @@ builder.Services.AddTransient<IAdminRepository, AdminRepository>();
 builder.Services.AddTransient<IUnitofWork, UnitOfWork>();
 builder.Services.AddTransient<ITokenHelper, TokenHelper>();
 builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddTransient<ITestRepository, TestRepository>();
+builder.Services.AddTransient<ITestService, TestService>();
 builder.Services.AddTransient<InitialSeed>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>()
