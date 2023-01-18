@@ -1,5 +1,6 @@
 ﻿using blood_donation_backend.blood_donation_backend.BLL.Interfaces;
 using blood_donation_backend.blood_donation_backend.BLL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +24,7 @@ namespace blood_donation_backend.Controllers
             return Ok(donor);
         }
 
+        [Authorize(Roles = "Admin,Doctor")]
         [HttpGet]
         public async Task<List<DonorModel>> GetDonor()
         {
@@ -30,6 +32,7 @@ namespace blood_donation_backend.Controllers
             return donors;
         }
 
+        [Authorize(Roles = "Admin,Doctor,Donor")]
         [HttpGet("{id}")]
         public async Task<DonorModel> GetDonorById([FromRoute] Guid id)
         {
@@ -38,19 +41,22 @@ namespace blood_donation_backend.Controllers
 
 
         }
+        [Authorize(Roles = "Admin,Doctor,Donor")]
         [HttpPut("{id}")]
         public async Task UpdateDonor([FromRoute] Guid id, [FromBody] DonorModel donor)
         {
             donor.Id = id;
             await _donorService.UpdateById(id, donor);
         }
-
+        [Authorize(Roles = "Admin,Doctor")]
         [HttpGet("patients/{id}")]
         public async Task<List<PatientModel>> GetPatientList([FromRoute] Guid id)
         {
             var patients = await _donorService.GetPatientsOfDonors(id);
             return patients;
         }
+
+        [Authorize(Roles = "Admin,Doctor")]
         [HttpGet("bloodType/{bloodType}")]
         public async Task<List<DonorModel>> FindDonors([FromRoute] string bloodType)
         {

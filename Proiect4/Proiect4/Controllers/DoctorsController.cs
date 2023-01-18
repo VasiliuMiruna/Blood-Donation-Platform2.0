@@ -1,5 +1,6 @@
 ﻿using blood_donation_backend.blood_donation_backend.BLL.Interfaces;
 using blood_donation_backend.blood_donation_backend.BLL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,7 @@ namespace blood_donation_backend.Controllers
             return Ok(doctor);
         }
 
+        [Authorize(Roles = "Admin,Doctor")]
         [HttpGet]
         public ActionResult GetDoctors()
         {
@@ -31,6 +33,7 @@ namespace blood_donation_backend.Controllers
             return Ok(doctors);
         }
 
+        [Authorize(Roles = "Admin,Doctor")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDoctor([FromRoute] Guid id)
         {
@@ -39,6 +42,8 @@ namespace blood_donation_backend.Controllers
 
 
         }
+
+        [Authorize(Roles = "Admin,Doctor")]
         [HttpPut("{id}")]
         public ActionResult UpdateDoctor([FromRoute] Guid id, [FromBody] DoctorModel doctor)
         {
@@ -47,6 +52,7 @@ namespace blood_donation_backend.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "Admin,Doctor")]
         [HttpDelete("{id}")]
         public ActionResult DeleteDoctor([FromRoute] Guid id)
         {
