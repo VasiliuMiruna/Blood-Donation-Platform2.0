@@ -7,6 +7,7 @@ using blood_donation_backend.Entities;
 using Microsoft.AspNetCore.Identity;
 using Proiect4.blood_donation_backend_BLL.Interfaces;
 using Proiect4.blood_donation_backend_DAL.Interfaces;
+using System.Net.Mail;
 
 namespace blood_donation_backend.blood_donation_backend.BLL.Services
 {
@@ -133,8 +134,23 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
                 }
 
                 await _unitOfWork.SaveChangesAsync();
-                
 
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+
+                smtpClient.Credentials = new System.Net.NetworkCredential("", "");
+                // smtpClient.UseDefaultCredentials = true; // uncomment if you don't want to use the network credentials
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.EnableSsl = true;
+                MailMessage mail = new MailMessage();
+                mail.Subject = "Thank you for register";
+                mail.Body = "<p>Hello,</p><br><p>Welcome to Blood-Donation-Platform</p>";
+                mail.IsBodyHtml = true;
+                //Setting From , To and CC
+                mail.From = new MailAddress("", "MyWeb Site");
+                mail.To.Add(new MailAddress(""));
+                //mail.CC.Add(new MailAddress("MyEmailID@gmail.com"));
+
+                smtpClient.Send(mail);
             }
             else
             {

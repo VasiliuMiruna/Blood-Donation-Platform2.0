@@ -18,12 +18,13 @@ namespace blood_donation_backend.Controllers
         }
 
         [HttpPost("Register")]
-
-
         public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
         {
             try {
+
+                Console.WriteLine(registerModel);
                 await _authService.Register(registerModel);
+
                 return Ok();
             }
             catch (Exception e)
