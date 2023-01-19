@@ -15,7 +15,7 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Entities
         public Admin? Admin { get; set; }
         public Doctor? Doctor { get; set; }
         public Patient? Patient { get; set; }
-        //public string RefreshToken { get; set; }
+        //public string? RefreshToken { get; set; }
 
         //public virtual ICollection<AppUserRole> UserRole { get; set; }
         //public virtual UserData UserData { get; set; }

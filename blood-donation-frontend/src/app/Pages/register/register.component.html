@@ -1,0 +1,73 @@
+<!-- Faci un form basic cu nume, prenume, role, username, parola
+Dupa ce selecteaza rolul x, apare div-ul corespunzator
+    x=Pacient => apar campuri si despre sange, medicamente, boli}
+    x=>Doctor => {functie, vechime} -->     
+    <form [formGroup]="registerUser" (ngSubmit)="onSubmit()">
+     
+      <p>
+        <label for="firstname">First Name </label>
+        <input type="text" id="firstname" name="firstname" formControlName="firstname">
+      </p>
+     
+      <p>
+        <label for="lastname">Last Name </label>
+        <input type="text" id="lastname" name="lastname" formControlName="lastname">
+      </p>
+     
+      <p>
+        <label for="email">Email </label>
+        <input type="text" id="email" name="email" formControlName="email">
+      </p>
+        
+      <p>
+        <label for="password">Password </label>
+        <input type="text" id="password" name="password" formControlName="password">
+      </p>
+      <label for="role">Role </label>
+      <p>
+        <select id="role" name="role" formControlName="role">
+          <option value="pacient">Pacient</option>
+          <option value="doctor">Doctor</option>
+          <option value="donator">Donator</option>
+          <option value="admin">Admin</option>
+        </select>
+      </p>
+      
+      <!-- <p>
+        <label for="role">role </label>
+        <select id="role" name="role" formControlName="role">
+          <option value="pacient">Pacient</option>
+          <option value="doctor">Doctor</option>
+          <option value="donator">Donator</option>
+        </select>
+      </p>
+      <div *ngIf="contactForm.value.role == 'donator' ">
+        <p>
+            <label for="age">Age </label>
+            <input type="text" id="age" name="age" formControlName="age">
+        </p>
+
+      </div>
+      <div *ngIf="contactForm.value.role == 'pacient'">
+        <p>
+            <label for="bloodType">bloodType </label>
+            <input type="text" id="bloodType" name="bloodType" formControlName="bloodType">
+        </p>
+        <p>
+            <label for="gender">gender </label>
+            <input type="text" id="gender" name="gender" formControlName="gender">
+        </p>
+      </div>
+      <div *ngIf="contactForm.value.role == 'doctor' ">
+        <p>
+            <label for="function">function </label>
+            <input type="text" id="function" name="function" formControlName="function">
+        </p> -->
+
+
+      <!-- </div> -->
+      <p>
+        <button type="submit">Submit</button>
+      </p>
+     
+    </form>

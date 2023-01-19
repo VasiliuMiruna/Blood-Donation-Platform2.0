@@ -158,5 +158,21 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
             }
 
         }
+         /*public async Task<string> Refresh(RefreshModel refreshModel)
+        {
+            var principal = _tokenHelper.GetPrincipalFromExpiredToken(refreshModel.AccessToken);
+            var username = principal.Identity.Name;
+
+            var user = await _userManager.FindByEmailAsync(username);
+
+            if (user.RefreshToken != refreshModel.RefreshToken)
+            {
+                return "Bad Refresh";
+            }
+
+            var newJwtToken = await _tokenHelper.CreateAccessToken(user);
+
+            return newJwtToken;
+        }*/
     }
 }

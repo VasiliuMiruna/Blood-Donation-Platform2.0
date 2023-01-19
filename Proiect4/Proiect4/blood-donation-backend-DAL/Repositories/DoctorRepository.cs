@@ -31,7 +31,7 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
         public async Task<Doctor> GetById(Guid id)
         {
             return _db.Doctors.FirstOrDefault(d => d.DoctorId == id);  //si asta nu trb sa fie async 
-            
+
         }
         
 
