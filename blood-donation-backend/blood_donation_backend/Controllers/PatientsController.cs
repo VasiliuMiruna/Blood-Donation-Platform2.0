@@ -34,7 +34,7 @@ namespace blood_donation_backend.Controllers
             return patients;
         }
 
-        [Authorize(Roles = "Admin,Doctor, Patient")]
+        [Authorize(Roles = "Admin,Doctor,Patient")]
         [HttpGet("{id}")]
         public async Task<PatientModel> GetPatient([FromRoute]Guid id)
         {

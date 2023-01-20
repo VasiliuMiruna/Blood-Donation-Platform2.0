@@ -42,6 +42,14 @@ namespace blood_donation_backend.Controllers
             return result.Success ? Ok(result) : BadRequest("Failed to login");
         }
 
+        [HttpPost("Refresh")]
+        public async Task<IActionResult> Refresh([FromBody] string refreshToken)
+        {
+            var result = await _authService.Refresh(refreshToken);
+            return result.Success ? Ok(result) : BadRequest("Failed to refresh Token");
+        }
+
+
     }
 }
 

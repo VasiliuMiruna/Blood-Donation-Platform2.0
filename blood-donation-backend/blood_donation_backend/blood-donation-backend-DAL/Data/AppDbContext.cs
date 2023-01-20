@@ -17,7 +17,7 @@ namespace blood_donation_backend.Data
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<PatientMedicine> PatientMedicines { get; set; }
         public DbSet<PatientDoctor> PatientDoctors { get; set; }
-       
+        public DbSet<AppUserRefreshToken> RefreshTokens { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -74,12 +74,17 @@ namespace blood_donation_backend.Data
                     .HasOne(d => d.User)
                     .WithOne(au => au.Doctor)
                     .HasForeignKey<Doctor>(d => d.UserId)
-                    .OnDelete(DeleteBehavior.NoAction); ;
+                    .OnDelete(DeleteBehavior.NoAction); 
             modelBuilder.Entity<Patient>()
                     .HasOne(d => d.User)
                     .WithOne(au => au.Patient)
                     .HasForeignKey<Patient>(d => d.UserId)
-                    .OnDelete(DeleteBehavior.NoAction); ;
+                    .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<AppUserRefreshToken>()
+                    .HasOne(d => d.User)
+                    .WithMany(au => au.RefreshTokens)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.Cascade); 
 
 
             //many to many between Patient and Medicine

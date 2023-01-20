@@ -46,11 +46,13 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
                 if (result.Succeeded)
                 {
                     var token = await _tokenHelper.CreateAccessToken(user);
+                    var refreshToken =  _tokenHelper.CreateRefreshToken(user);
 
                     return new LoginResult
                     {
                         Success = true,
-                        AccessToken = token
+                        AccessToken = token,
+                        RefreshToken = refreshToken
 
                     };
                 }
@@ -158,21 +160,32 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
             }
 
         }
-         /*public async Task<string> Refresh(RefreshModel refreshModel)
+        public async Task<LoginResult> Refresh(string refreshToken)
         {
-            var principal = _tokenHelper.GetPrincipalFromExpiredToken(refreshModel.AccessToken);
-            var username = principal.Identity.Name;
-
-            var user = await _userManager.FindByEmailAsync(username);
-
-            if (user.RefreshToken != refreshModel.RefreshToken)
+            var claimsPrincipal = _tokenHelper.GetPrincipalFromRefreshToken(refreshToken);
+            var userId = claimsPrincipal.Identity.Name;
+            var user = await _userManager.FindByNameAsync(userId);
+            if (user == null)
+                return new LoginResult
+                {
+                    Success = false,
+                };
+            else
             {
-                return "Bad Refresh";
+                var token = await _tokenHelper.CreateAccessToken(user);
+                refreshToken =  _tokenHelper.CreateRefreshToken(user);
+
+                return new LoginResult
+                {
+                    Success = true,
+                    AccessToken = token,
+                    RefreshToken = refreshToken
+
+                };
             }
 
-            var newJwtToken = await _tokenHelper.CreateAccessToken(user);
+        }
 
-            return newJwtToken;
-        }*/
+
     }
 }

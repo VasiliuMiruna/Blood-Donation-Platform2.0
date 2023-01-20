@@ -32,12 +32,7 @@ namespace Proiect4.Controllers
             var list = await _testService.GetPositives();
             return list;
         }
-        [Authorize(Roles = "Admin, Donor")]
-        [HttpGet]
-        public async Task<List<Guid>> GetAllPositives()
-        {
-            var list = await _testService.GetPositives();
-            return list;
-        }
+        
+       
     }
 }

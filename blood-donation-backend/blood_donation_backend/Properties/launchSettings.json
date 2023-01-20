@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Proiect4": {
+    "blood_donation_backend": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

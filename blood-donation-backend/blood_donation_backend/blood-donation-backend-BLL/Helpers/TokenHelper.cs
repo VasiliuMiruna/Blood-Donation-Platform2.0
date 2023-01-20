@@ -60,25 +60,52 @@ namespace Proiect4.blood_donation_backend_BLL.Helpers
             return tokenHandler.WriteToken(token);
 
         }
-        public string CreateRefreshToken()
+        public string CreateRefreshToken(AppUser _User)
         {
-            var randomNumber = new byte[32];
+            var userId = _User.Id.ToString();
+            var userName = _User.UserName;
 
-            using (var rng = RandomNumberGenerator.Create())
+            var claims = new List<Claim>
             {
-                rng.GetBytes(randomNumber);
-                return Convert.ToBase64String(randomNumber);
-            }
+                new Claim(ClaimTypes.NameIdentifier, userId),
+                new Claim(ClaimTypes.Name, userName)
+            };
+
+
+            var secret = _configuration["Jwt:Key"];
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
+
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = creds,
+                Issuer = _configuration["Jwt:Issuer"],
+                Audience = _configuration["Jwt:Audience"]
+
+
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
+
         }
 
-        public ClaimsPrincipal GetPrincipalFromExpiredToken(string _Token)
+
+        public ClaimsPrincipal GetPrincipalFromRefreshToken(string refreshToken)
         {
             var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
                 ValidateLifetime = true,
                 RequireExpirationTime = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Token"])),
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"])),
                 ValidateIssuer = false,
                 ValidateAudience = false
             };
@@ -88,10 +115,10 @@ namespace Proiect4.blood_donation_backend_BLL.Helpers
             var tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken securityToken;
 
-            var principal = tokenHandler.ValidateToken(_Token, tokenValidationParameters, out securityToken);
+            var principal = tokenHandler.ValidateToken(refreshToken, tokenValidationParameters, out securityToken);
             var jwtSecurityToken = securityToken as JwtSecurityToken;
 
-            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals("hs256", StringComparison.InvariantCultureIgnoreCase))
+            if (jwtSecurityToken == null) 
             {
                 throw new SecurityTokenException("Invalid token");
             }

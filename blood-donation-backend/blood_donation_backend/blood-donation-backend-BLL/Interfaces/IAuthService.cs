@@ -6,5 +6,6 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Interfaces
     {
         Task Register(RegisterModel registerModel);
         Task<LoginResult> Login(LoginModel loginModel);
+        Task<LoginResult> Refresh(string refreshToken);
     }
 }

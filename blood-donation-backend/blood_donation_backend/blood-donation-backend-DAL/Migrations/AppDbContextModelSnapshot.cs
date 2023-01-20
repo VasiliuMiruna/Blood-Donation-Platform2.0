@@ -116,6 +116,27 @@ namespace Proiect4.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("blood_donation_backend.blood_donation_backend.DAL.Entities.AppUserRefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RefreshTokens");
+                });
+
             modelBuilder.Entity("blood_donation_backend.Entities.Doctor", b =>
                 {
                     b.Property<Guid>("DoctorId")
@@ -465,6 +486,17 @@ namespace Proiect4.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("blood_donation_backend.blood_donation_backend.DAL.Entities.AppUserRefreshToken", b =>
+                {
+                    b.HasOne("blood_donation_backend.blood_donation_backend.DAL.Entities.AppUser", "User")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("blood_donation_backend.Entities.Doctor", b =>
                 {
                     b.HasOne("blood_donation_backend.blood_donation_backend.DAL.Entities.AppUser", "User")
@@ -625,6 +657,8 @@ namespace Proiect4.Migrations
                     b.Navigation("Donor");
 
                     b.Navigation("Patient");
+
+                    b.Navigation("RefreshTokens");
                 });
 
             modelBuilder.Entity("blood_donation_backend.Entities.Doctor", b =>
