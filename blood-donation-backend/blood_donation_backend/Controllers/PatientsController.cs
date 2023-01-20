@@ -19,12 +19,7 @@ namespace blood_donation_backend.Controllers
             _patientService = patientService;
         }
 
-     /*   [HttpPost]
-        public async Task<IActionResult> Post([FromBody] PatientModel patient)
-        {
-            await _patientService.Create(patient);
-            return Ok(patient);
-        }*/
+     
 
         [Authorize(Roles="Admin,Doctor")]
         [HttpGet]
@@ -32,6 +27,7 @@ namespace blood_donation_backend.Controllers
         {
             var patients = await _patientService.GetAll();
             return patients;
+
         }
 
         [Authorize(Roles = "Admin,Doctor,Patient")]
