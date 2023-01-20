@@ -6,6 +6,7 @@
         public string? Name { get; set; }
         public DateTime? ExpirationDate { get; set; }
         public string? Prospect { get; set; }
-        public List<PatientModel> Patients { get; set; }
+        //public List<PatientModel> Patients { get; set; }
+        public List<Guid> PatientsIds {get; set; }
     }
 }
