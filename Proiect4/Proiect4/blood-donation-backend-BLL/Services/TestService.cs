@@ -16,7 +16,7 @@ namespace Proiect4.blood_donation_backend_BLL.Services
 
         public async Task Create(TestModel test)
         {
-
+            
             var newTest = new Test
             {
                 TestId = new Guid(),
@@ -30,17 +30,6 @@ namespace Proiect4.blood_donation_backend_BLL.Services
             };
 
             await _testRepository.Create(newTest);
-
-        }
-        public async Task<List<Guid>> GetPositives()
-        {
-            var tests = await _testRepository.GetAllPositives();
-            var list = new List<Guid>();
-            foreach (var test in tests)
-            {
-                list.Add(test.TestId);
-            }
-            return list;
 
         }
     }

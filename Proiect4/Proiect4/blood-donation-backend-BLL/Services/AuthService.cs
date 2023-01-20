@@ -50,8 +50,7 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
                     return new LoginResult
                     {
                         Success = true,
-                        AccessToken = token,
-                        
+                        AccessToken = token
 
                     };
                 }
@@ -138,7 +137,7 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
 
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
 
-                smtpClient.Credentials = new System.Net.NetworkCredential("blooddonationtest@gmail.com", "nvfayjhmcruemsvf");
+                smtpClient.Credentials = new System.Net.NetworkCredential("", "");
                 // smtpClient.UseDefaultCredentials = true; // uncomment if you don't want to use the network credentials
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.EnableSsl = true;
@@ -147,8 +146,8 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
                 mail.Body = "<p>Hello,</p><br><p>Welcome to Blood-Donation-Platform</p>";
                 mail.IsBodyHtml = true;
                 //Setting From , To and CC
-                mail.From = new MailAddress("blooddonationtest@gmail.com", "BloodDonation");
-                mail.To.Add(new MailAddress("vasiliumirunamaria@gmail.com"));
+                mail.From = new MailAddress("", "MyWeb Site");
+                mail.To.Add(new MailAddress(""));
                 //mail.CC.Add(new MailAddress("MyEmailID@gmail.com"));
 
                 smtpClient.Send(mail);
