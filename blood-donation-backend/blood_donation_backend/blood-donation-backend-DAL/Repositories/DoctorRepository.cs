@@ -24,13 +24,13 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
         public async Task<List<Doctor>> GetAll()
         {
             
-            return _db.Doctors.ToList(); //scot si eu asyncul poate
+            return _db.Doctors.ToList(); 
             
         }
 
         public async Task<Doctor> GetById(Guid id)
         {
-            return _db.Doctors.FirstOrDefault(d => d.DoctorId == id);  //si asta nu trb sa fie async 
+            return _db.Doctors.FirstOrDefault(d => d.DoctorId == id);  
 
         }
         

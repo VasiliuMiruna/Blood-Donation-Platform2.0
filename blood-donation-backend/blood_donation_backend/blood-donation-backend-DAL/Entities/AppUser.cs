@@ -5,10 +5,7 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Entities
 {
     public class AppUser : IdentityUser
     {
-        //public int Id { get; set; }
-    /*    public string Email { get; set; }
-        public string Password { get; set; }
-        public string Token { get; set; }*/
+     
         public DateTime TokenExpiration { get; set; }
 
         public Donor? Donor { get; set; }
@@ -17,17 +14,7 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Entities
         public Patient? Patient { get; set; }
         public List<AppUserRefreshToken> RefreshTokens { get; set; }
 
-        //public virtual ICollection<AppUserRole> UserRole { get; set; }
-        //public virtual UserData UserData { get; set; }
-        //public virtual ICollection<Role> AllRoles { get; set; }
-
-        //public ICollection<UserRole> UserRoles { get; set; }
-
-
-        /*        public AppUser()
-                {
-                    Tokens = new List<Token>();
-                }*/
+       
     }
     
 }

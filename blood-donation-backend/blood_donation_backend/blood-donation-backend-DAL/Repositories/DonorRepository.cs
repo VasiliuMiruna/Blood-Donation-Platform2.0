@@ -38,7 +38,7 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
       public async Task UpdateDonor(Donor donor)
         {
 
-            //aici ar trb doar sa dea update
+           
             _db.Donors.Update(donor);
             await _db.SaveChangesAsync();
         }
