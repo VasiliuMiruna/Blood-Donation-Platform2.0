@@ -24,5 +24,20 @@ namespace Proiect4.Controllers
             await _testService.Create(test);
             return Ok(test);
         }
+
+        [Authorize(Roles = "Admin, Donor")]
+        [HttpGet]
+        public async Task<List<Guid>> GetAllPositives([FromBody] TestModel test)
+        {
+            var list = await _testService.GetPositives();
+            return list;
+        }
+        [Authorize(Roles = "Admin, Donor")]
+        [HttpGet]
+        public async Task<List<Guid>> GetAllPositives()
+        {
+            var list = await _testService.GetPositives();
+            return list;
+        }
     }
 }

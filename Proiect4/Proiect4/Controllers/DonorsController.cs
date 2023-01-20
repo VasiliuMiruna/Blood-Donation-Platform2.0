@@ -50,9 +50,9 @@ namespace blood_donation_backend.Controllers
         }
         [Authorize(Roles = "Admin,Doctor")]
         [HttpGet("patients/{id}")]
-        public async Task<List<PatientModel>> GetPatientList([FromRoute] Guid id)
+        public async Task<List<Guid>> GetPatientList([FromRoute] Guid id)
         {
-            var patients = await _donorService.GetPatientsOfDonors(id);
+            var patients = await _donorService.GetPatientsOfDonors(id);//return who the donor donated to
             return patients;
         }
 
@@ -65,6 +65,7 @@ namespace blood_donation_backend.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task DeleteDonor([FromRoute] Guid id)
         {

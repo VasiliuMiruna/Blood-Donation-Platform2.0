@@ -101,22 +101,24 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
             else return false;
         }
 
-        public async Task<List<PatientModel>> GetPatientsOfDonors(Guid donorId)
+        public async Task<List<Guid>> GetPatientsOfDonors(Guid donorId)
         {
             var patients = await _donorRepository.GetPatientsOfDonors(donorId);
-            var list = new List<PatientModel>();
+            var list = new List<Guid>();
             foreach (var patient in patients)
             {
-                var patientModel = new PatientModel
-                {
-                    Id = patient.PatientId,
-                    FirstName = patient.FirstName,
-                    LastName = patient.LastName,
-                    Age = patient.Age,
-                    BloodType = patient.BloodType,
-                    Gender = patient.Gender,
-                };
-                list.Add(patientModel);
+                /* var patientModel = new PatientModel
+                 {
+                     Id = patient.PatientId,
+                     FirstName = patient.FirstName,
+                     LastName = patient.LastName,
+                     Age = patient.Age,
+                     BloodType = patient.BloodType,
+                     Gender = patient.Gender,
+                 };
+                 list.Add(patientModel);*/
+                var id = patient.PatientId;
+               list.Add(id);
             }
             return list;
 

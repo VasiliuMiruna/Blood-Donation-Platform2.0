@@ -20,6 +20,6 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Models
         /*public int UserId { get; set; }
         public virtual AppUser User { get; set; }*/
 
-        public ICollection<PatientModel>? Patients { get; set; }
+        public ICollection<Guid>? Patients { get; set; }
     }
 }

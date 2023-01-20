@@ -24,7 +24,7 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Models
         public Guid? DonorId { get; set; }
 
         
-        public IList<MedicineModel>? Medicines { get; set; }
+        public IList<Guid>? Medicines { get; set; }
 
 /*        public int UserId { get; set; }
         public virtual AppUser User { get; set; }*/
