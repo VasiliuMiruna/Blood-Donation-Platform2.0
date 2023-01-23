@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Patient } from 'src/app/Models/Patient';
 import { User } from 'src/app/Models/User';
 import { AuthService } from 'src/app/Services/Auth/auth.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -27,7 +28,7 @@ export class RegisterComponent {
     
   }) 
    
-   constructor(private authService: AuthService, private formBuilder: FormBuilder){}
+   constructor(private router: Router,private authService: AuthService, private formBuilder: FormBuilder){}
    ngOnInit() {
     
   }

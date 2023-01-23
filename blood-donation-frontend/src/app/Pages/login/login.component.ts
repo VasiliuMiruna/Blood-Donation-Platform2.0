@@ -3,14 +3,29 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { LoginUser } from 'src/app/Models/LoginUser';
 import { Patient } from 'src/app/Models/Patient';
 import { AuthService } from 'src/app/Services/Auth/auth.service';
-import { Router } from "@angular/router";
+import { PatientService } from 'src/app/Services/Patient/patient.service';
+import { RegisterComponent } from '../register/register.component';
+import { Routes, Router, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+
+
+const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent },
+];
+
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+
 export class LoginComponent {
+
+  
   invalidLogin?: boolean;
   formUser = this.fb.group({
     email: [''],
@@ -23,18 +38,36 @@ export class LoginComponent {
     password: new FormControl(),
     
   })
-  constructor(private router: Router, private fb: FormBuilder,private authService: AuthService){}
+  constructor(private patientService: PatientService, private router: Router, private fb: FormBuilder,private authService: AuthService){}
   
+
+  
+
   onSubmit(){
     this.loginUser.Password = this.formUser.value.password?.toString() ?? ""
     this.loginUser.Email = this.formUser.value.email?.toString() ?? ""
     console.log("S-a conectat in login.component.ts")
     console.log(this.contactForm)
-    this.authService.loginUser(this.loginUser).subscribe(data=>console.log(data),response => {
-      const token = (<any>response).token;
+    this.authService.loginUser(this.loginUser).subscribe(response => {
+      console.log(response)
+      const token = (<any>response).accessToken;
+      console.log(token)
+      var currentRole = this.authService.GetRoleByToken(token);
       localStorage.setItem("jwt", token);
-      this.invalidLogin = false;
-      this.router.navigate(["/Doctor"]);
+      console.log(currentRole);
+      localStorage.setItem("role", currentRole);
+      //localStorage.setItem("role")
+      // this.invalidLogin = false;
+      if(currentRole == "Doctor")
+        this.router.navigate(["/Doctor"]);
+      else if(currentRole == "Patient")
+      {
+      this.patientService.setUser(response);
+      this.router.navigate(["/Patient"]);
+      }
+      else if(currentRole == "Admin")
+        this.router.navigate(["/Admin"]);
+      else this.router.navigate(["/Donor"]);
     });
     
   }

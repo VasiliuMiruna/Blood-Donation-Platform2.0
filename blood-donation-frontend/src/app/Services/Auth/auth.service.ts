@@ -7,12 +7,20 @@ import { User } from 'src/app/Models/User';
 
 @Injectable({
   providedIn: 'root'
+  
 })
 export class AuthService {
   
+  tokenResp:any
   baseApiUrl: string = environment.baseApiUrl
   constructor(private http:HttpClient) { }
 
+  GetRoleByToken(token: any) {
+    let _token = token.split('.')[1];
+    this.tokenResp = JSON.parse(atob(_token));
+    console.log(this.tokenResp.role);
+    return this.tokenResp.role;
+  }
   
   registerPatient(user: any){
     console.log("Am ajuns in service auth.service.ts")

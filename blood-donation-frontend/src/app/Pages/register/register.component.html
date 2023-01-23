@@ -1,32 +1,44 @@
 <!-- Faci un form basic cu nume, prenume, role, username, parola
 Dupa ce selecteaza rolul x, apare div-ul corespunzator
     x=Pacient => apar campuri si despre sange, medicamente, boli}
-    x=>Doctor => {functie, vechime} -->     
+    x.=>Doctor => {functie, vechime} -->     
+<body>
+  <header class="header">
+		<h1 class="logo"><a href="#">Blood Donation Platform</a></h1>
+      <ul class = "navbar">
+          <li><a href="#">Register</a></li>
+          <li><a href="#">Login</a></li>
+      </ul>
+	</header> 
+
+
+
+
+<div class="card">
+  <div class="card-body">
     <form [formGroup]="registerUser" (ngSubmit)="onSubmit()">
-     
-      <p>
+
+      <h3 class="card-title">Register</h3>
+     <p>
         <label for="firstname">First Name </label>
-        <input type="text" id="firstname" name="firstname" formControlName="firstname">
-      </p>
-     
-      <p>
+          <input type="text" placeholder = "First Name" id="firstname" name="firstname" formControlName="firstname">
+     </p>
+     <p>
         <label for="lastname">Last Name </label>
-        <input type="text" id="lastname" name="lastname" formControlName="lastname">
-      </p>
-     
-      <p>
+          <input type="text" placeholder = "Last Name" id="lastname" name="lastname" formControlName="lastname">
+     </p>
+     <p>
         <label for="email">Email </label>
-        <input type="text" id="email" name="email" formControlName="email">
-      </p>
+          <input type="text" placeholder = "Email" id="email" name="email" formControlName="email">
+     </p>
         
-      <p>
         <label for="password">Password </label>
-        <input type="text" id="password" name="password" formControlName="password">
-      </p>
-      <label for="role">Role </label>
+          <input type="password" placeholder = "Password" id="password" name="password" formControlName="password">
       <p>
-        <select id="role" name="role" formControlName="role">
-          <option value="pacient">Pacient</option>
+      <label for="role">Role </label>
+        <select id="role" placeholder = "Role" name="role" formControlName="role">
+          <option value="" disabled selected hidden>Choose a role</option>
+          <option value="patient">Patient</option>
           <option value="doctor">Doctor</option>
           <option value="donator">Donator</option>
           <option value="admin">Admin</option>
@@ -71,3 +83,8 @@ Dupa ce selecteaza rolul x, apare div-ul corespunzator
       </p>
      
     </form>
+
+  </div>
+  </div>  
+  
+</body>

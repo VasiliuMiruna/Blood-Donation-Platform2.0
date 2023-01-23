@@ -1,16 +1,27 @@
-<form [formGroup]="formUser" (ngSubmit)="onSubmit()">
+<body>
+  <header class="header">
+		<h1 class="logo"><a href="#">Blood Donation Platform</a></h1>
+      <ul class = "navbar">
+          <li><a routerLink = "/register" class="nav-link" routerLinkActive="active">Register</a></li>
+          <li><a href="/login">Log in</a></li>
 
+      </ul>
+	</header> 
+<form [formGroup]="formUser" (ngSubmit)="onSubmit()">
+  <h3>Login Here</h3>
 <p>
     <label for="email">Email </label>
-    <input type="text" id="email" name="email" formControlName="email">
+    <input type="text" placeholder="Email" id="email" name="email" formControlName="email">
   </p>
     
   <p>
     <label for="password">Password </label>
-    <input type="text" id="password" name="password" formControlName="password">
+    <input type="password" placeholder="Password" id="password" name="password" formControlName="password">
   </p>
   <p>
-    <button type="submit">Submit</button>
+    <button type="submit">Log in</button>
   </p>
 
 </form>
+
+</body>

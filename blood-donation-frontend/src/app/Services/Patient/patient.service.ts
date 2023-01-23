@@ -1,26 +1,47 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Patient } from 'src/app/Models/Patient';
+import { User } from 'src/app/Models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
 
+  user = new User()
   private publicHttpHeaders= {
   //'Authorization': 'Bearer ' + localStorage.getItem('token')
-    headers: new HttpHeaders({'content-type':'application/json'}) 
+    headers: new HttpHeaders({'content-type':'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem('jwt')}) 
     
   };
+  
   constructor(private http:HttpClient) {
 
    }
+
+   setUser(_user:User) {
+      this.user = _user;
+      console.log("Suntem ins set")
+      console.log(this.user)
+
+
+   }
+   GetMyself(){
+    return this.user;
+   }
   //pot avea orice nume
-  GetPatient(){
-    return this.http.get("https://localhost:7118/api/Patients");
+  GetPatientById(){
+    return this.http.get("https://localhost:7118/api/Patients/",this.publicHttpHeaders);
   }
 
   GetById(id : any) {
-      return this.http.get("https://localhost:7038/api/Patients/byId?id=" + id)
+      return this.http.get("https://localhost:7118/api/Patients/" + id,this.publicHttpHeaders)
+  }
+
+  DeleteById(id: any) {
+    return this.http.delete("https://localhost:7118/api/Patients/" + id, this.publicHttpHeaders)
+  
   }
   // addPatient(){
   //   return this.http.post("https://localhost:7038/api/Patients")

@@ -8,13 +8,15 @@ import { DashboardDoctorComponent } from './Pages/dashboard-doctor/dashboard-doc
 import { RegisterComponent } from './Pages/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './Pages/login/login.component';
+import { DashboardPatientComponent } from './Pages/dashboard-patient/dashboard-patient.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardDoctorComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardPatientComponent
   ],
   imports: [
     BrowserModule,
