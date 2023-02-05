@@ -53,17 +53,21 @@ export class LoginComponent {
       const token = (<any>response).accessToken;
       console.log(token)
       var currentRole = this.authService.GetRoleByToken(token);
+      var currentId = this.authService.GetIdByToken(token);
       localStorage.setItem("jwt", token);
       console.log(currentRole);
+      console.log(currentId);
       localStorage.setItem("role", currentRole);
+      localStorage.setItem("id", currentId);
       //localStorage.setItem("role")
       // this.invalidLogin = false;
       if(currentRole == "Doctor")
-        this.router.navigate(["/Doctor"]);
+        this.router.navigate(["/Doctor/" + currentId]);
       else if(currentRole == "Patient")
       {
+        
       this.patientService.setUser(response);
-      this.router.navigate(["/Patient"]);
+      this.router.navigate(["/Patient/" + currentId]);
       }
       else if(currentRole == "Admin")
         this.router.navigate(["/Admin"]);

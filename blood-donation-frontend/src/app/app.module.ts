@@ -9,6 +9,8 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './Pages/login/login.component';
 import { DashboardPatientComponent } from './Pages/dashboard-patient/dashboard-patient.component';
+import { DashboardDonorComponent } from './Pages/dashboard-donor/dashboard-donor.component';
+import { DashboardAdminComponent } from './Pages/dashboard-admin/dashboard-admin.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { DashboardPatientComponent } from './Pages/dashboard-patient/dashboard-p
     DashboardDoctorComponent,
     RegisterComponent,
     LoginComponent,
-    DashboardPatientComponent
+    DashboardPatientComponent,
+    DashboardDonorComponent,
+    DashboardAdminComponent
   ],
   imports: [
     BrowserModule,

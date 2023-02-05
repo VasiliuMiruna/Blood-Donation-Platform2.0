@@ -21,6 +21,13 @@ export class AuthService {
     console.log(this.tokenResp.role);
     return this.tokenResp.role;
   }
+
+  GetIdByToken(token: any) {
+    let _token = token.split('.')[1];
+    this.tokenResp = JSON.parse(atob(_token));
+    console.log(this.tokenResp.nameid);
+    return this.tokenResp.nameid;
+  }
   
   registerPatient(user: any){
     console.log("Am ajuns in service auth.service.ts")
