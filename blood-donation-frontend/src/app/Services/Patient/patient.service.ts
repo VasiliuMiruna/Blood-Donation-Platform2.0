@@ -38,7 +38,11 @@ export class PatientService {
   GetById(id : any) {
       return this.http.get("https://localhost:7118/api/Patients/" + id,this.publicHttpHeaders)
   }
-
+  UpdateById(id : any, value : Patient) {
+    return this.http.put("https://localhost:7118/api/Patients/" + id, value)
+    .subscribe();
+    
+  }
   DeleteById(id: any) {
     return this.http.delete("https://localhost:7118/api/Patients/" + id, this.publicHttpHeaders)
   

@@ -1,6 +1,10 @@
 export class Patient {
-    Id : number = 0;
-    FirstName : string = "";
-    LastName : string = "";
+    id : number = 0;
+    firstName : string = "";
+    lastName : string = "";
+    age : number = 0;
+    bloodType : string = "";
+    gender : string = "";
+    phoneNumber : string = "";
     constructor(){}
 }

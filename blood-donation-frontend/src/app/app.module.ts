@@ -11,6 +11,8 @@ import { LoginComponent } from './Pages/login/login.component';
 import { DashboardPatientComponent } from './Pages/dashboard-patient/dashboard-patient.component';
 import { DashboardDonorComponent } from './Pages/dashboard-donor/dashboard-donor.component';
 import { DashboardAdminComponent } from './Pages/dashboard-admin/dashboard-admin.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { DashboardAdminComponent } from './Pages/dashboard-admin/dashboard-admin
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

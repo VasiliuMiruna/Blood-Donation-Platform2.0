@@ -47,7 +47,8 @@ namespace blood_donation_backend.Services
                     LastName = patient.LastName,
                     Age = patient.Age,
                     Gender = patient.Gender,
-                    BloodType = patient.BloodType
+                    BloodType = patient.BloodType,
+                    PhoneNumber = patient.PhoneNumber
 
                 };
                 list.Add(parientModel);
@@ -67,13 +68,14 @@ namespace blood_donation_backend.Services
                 return null;
             }
             var patientModel = new PatientModel
-             {
-                    Id = patient.PatientId,
-                    FirstName = patient.FirstName,
-                    LastName = patient.LastName,
-                    Age = patient.Age,
-                    Gender = patient.Gender,
-                    BloodType = patient.BloodType
+            {
+                Id = patient.PatientId,
+                FirstName = patient.FirstName,
+                LastName = patient.LastName,
+                Age = patient.Age,
+                Gender = patient.Gender,
+                BloodType = patient.BloodType,
+                PhoneNumber = patient.PhoneNumber
 
              };
             return patientModel;
@@ -89,6 +91,8 @@ namespace blood_donation_backend.Services
                 patientDb.Age = patient.Age;
                 patientDb.Gender = patient.Gender;
                 patientDb.BloodType = patient.BloodType;
+                patientDb.PhoneNumber = patient.PhoneNumber;
+                await _patientRepository.UpdatePatient(patientDb);
                 return true;
             }
             else return false;

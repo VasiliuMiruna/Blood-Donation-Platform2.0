@@ -149,7 +149,7 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
                 mail.IsBodyHtml = true;
                 //Setting From , To and CC
                 mail.From = new MailAddress("blooddonationtest@gmail.com", "MyWeb Site");
-                mail.To.Add(new MailAddress("vasiliumirunamaria@gmail.com"));
+                mail.To.Add(new MailAddress("blooddonationtest@gmail.com"));
                 //mail.CC.Add(new MailAddress("MyEmailID@gmail.com"));
 
                 smtpClient.Send(mail);
