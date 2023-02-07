@@ -13,7 +13,8 @@ import { DashboardDonorComponent } from './Pages/dashboard-donor/dashboard-donor
 import { DashboardAdminComponent } from './Pages/dashboard-admin/dashboard-admin.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
-
+import { ProfileDoctorComponent } from './Pages/profile-doctor/profile-doctor.component';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { FormsModule }   from '@angular/forms';
     LoginComponent,
     DashboardPatientComponent,
     DashboardDonorComponent,
-    DashboardAdminComponent
+    DashboardAdminComponent,
+    ProfileDoctorComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { FormsModule }   from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

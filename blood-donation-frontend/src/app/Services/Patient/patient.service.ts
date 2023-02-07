@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Patient } from 'src/app/Models/Patient';
 import { User } from 'src/app/Models/User';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,7 +41,7 @@ export class PatientService {
       return this.http.get("https://localhost:7118/api/Patients/" + id,this.publicHttpHeaders)
   }
   UpdateById(id : any, value : Patient) {
-    return this.http.put("https://localhost:7118/api/Patients/" + id, value)
+    return this.http.put("https://localhost:7118/api/Patients/" + id, value, this.publicHttpHeaders)
     .subscribe();
     
   }

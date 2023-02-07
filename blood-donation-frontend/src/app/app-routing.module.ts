@@ -7,11 +7,25 @@ import { LoginComponent } from './Pages/login/login.component';
 import { DashboardPatientComponent } from './Pages/dashboard-patient/dashboard-patient.component';
 import { AuthGuard } from './Guard/Auth/auth.guard';
 import { DashboardAdminComponent } from './Pages/dashboard-admin/dashboard-admin.component';
+import { ProfileDoctorComponent } from './Pages/profile-doctor/profile-doctor.component';
 
 const routes: Routes = [{
   path:"Doctor/:id",
-  component: DashboardDoctorComponent,
-  canActivate : [AuthGuard]
+  children: [
+    { path: '',
+      component: DashboardDoctorComponent,
+      canActivate : [AuthGuard]
+    },
+    {
+      path:"Patients",
+      component: DashboardDoctorComponent,
+      canActivate : [AuthGuard]
+    },
+    {
+      path:'Account',
+      component: ProfileDoctorComponent,
+    }
+  ]
 },
 {
   //doamne a mers

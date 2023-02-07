@@ -3,17 +3,28 @@ import { PatientService } from 'src/app/Services/Patient/patient.service';
 import { DoctorService } from 'src/app/Services/Doctor/doctor.service';
 import { Routes, RouterModule, TitleStrategy } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { ProfileDoctorComponent } from '../profile-doctor/profile-doctor.component';
+
+// const routes: Routes = [
+//   { path: '', redirectTo: 'login', pathMatch: 'full' },
+//   { path: 'register', component: RegisterComponent },
+// ];
+
+
+const routes: Routes = [
+  { path: '', redirectTo: 'Doctor', pathMatch: 'full' },
+  {path: 'Account', component: ProfileDoctorComponent}
+  // { path: 'add', component: CreatePatientComponent },
+];
+
 @Component({
   selector: 'app-dashboard-doctor',
   templateUrl: './dashboard-doctor.component.html',
   styleUrls: ['./dashboard-doctor.component.css']
 })
 
-// const routes: Routes = [
-//   { path: '', redirectTo: 'Doctor', pathMatch: 'full' },
-//   // { path: 'Patients', component: DashboardDoctorComponent },
-//   // { path: 'add', component: CreatePatientComponent },
-// ];
+
+
 export class DashboardDoctorComponent {
   //declar variabilele
   patientList : any
@@ -39,20 +50,25 @@ ngOnInit() {
       console.log(this.patientList)
     })
   }
+
   onPatientCreate(patients: {id: any, firstName:string, lastName:string, age:number, bloodType:string, gender:string,phoneNumber:string}){
     patients.id = this.currentPatientId;
     if(this.editMode)
       this.patientService.UpdateById(this.currentPatientId, patients)
     else
       this.getAllPatients();
+    
+    //refresh
+    this.ngOnInit();
     }
+    
 
 
   getPatientById(id : any) {
       console.log(id)
       this.patientService.GetById(id).subscribe((res)=> {
         console.log(res)
-    this.patient1 = res
+      this.patient1 = res
       this.ok = true
       console.log()
       //console.log(JSON.parse(this.patient).lastName)

@@ -1,5 +1,25 @@
-<!-- <div>
-    <h2>{{patient.firstName}}</h2>
+<body>
+    <header class="header">
+		<h1 class="logo"><a href="#">Blood Donation Platform</a></h1>
+      <ul class = "navbar">
+          <li><a routerLink ='/Account'>My account</a></li>
+          <li><a href="#">Log out</a></li>
+      </ul>
+	</header> 
+<div>
+<h2>Your account Information</h2>
+<div class="container">
+    <div *ngIf="patient">
+        <mat-card class="card">
+            <div class="patient">
+                <p>
+                    <!-- {{ patient.lastName }} -->
+                </p>
+                <button (click)="getPatientById(patient.id)">Show Info</button>
+            
+                <!-- <button (click)="onEditClicked(patient.id)">Edit</button> -->
+                <!-- <button (click)="deletePatientById(patient.id)">Delete Patient</button> -->
+            </div>  
+        </mat-card>
+    </div>
 </div>
-
-<p>Ana are <span style="font-size: 40px">MERE </span></p> -->
