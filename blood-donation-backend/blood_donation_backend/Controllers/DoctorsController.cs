@@ -44,6 +44,16 @@ namespace blood_donation_backend.Controllers
         }
 
         [Authorize(Roles = "Admin,Doctor")]
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetDoctorUser([FromRoute] string userId)
+        {
+            var doctor = await _doctorService.GetByUserId(userId);
+            return Ok(doctor);
+
+
+        }
+
+        [Authorize(Roles = "Admin,Doctor")]
         [HttpPut("{id}")]
         public ActionResult UpdateDoctor([FromRoute] Guid id, [FromBody] DoctorModel doctor)
         {

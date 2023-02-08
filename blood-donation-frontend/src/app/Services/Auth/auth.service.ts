@@ -56,8 +56,8 @@ export class AuthService {
     console.log(user)
     // return this.http.register....
     //return this.http.post("https://localhost:7118/api/Auth/Register");
-    return this.http.post<any>(`${this.baseApiUrl}/api/Auth/Register`, user
-  );}
+    return this.http.post<any>(`${this.baseApiUrl}/api/Auth/Register`, user);
+  }
   loginUser(user: any){
     console.log("Am ajuns in service auth.service.ts")
     // exemplu:  return this.http.get("https://localhost:7118/api/Patients");

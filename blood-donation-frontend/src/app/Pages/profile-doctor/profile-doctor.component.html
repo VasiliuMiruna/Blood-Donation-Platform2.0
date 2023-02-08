@@ -2,10 +2,31 @@
     <header class="header">
 		<h1 class="logo"><a href="#">Blood Donation Platform</a></h1>
       <ul class = "navbar">
-          <li><a routerLink ='/Account'>My account</a></li>
-          <li><a routerLink ='/Patients'>Patients</a></li>
+        <!-- nu merge nu stiu de ce -->
+          <!-- <li><a routerLink ="/Account" class="nav-link" routerLinkActive="active">My account</a></li> -->
+          <li><a routerLink ="/Account" class="nav-link" >My account</a></li>
+          <li><a class="nav-link" >Patients</a></li>
           <li><a href="#">Log out</a></li>
       </ul>
 	</header> 
 <div>
+    <h2>Your account Information</h2>
+    <div class="container">
+        <div *ngIf="doctor">
+            <mat-card class="card">
+                <div class="doctor">
+                    <p>First name: {{ doctor.firstName }}</p>
+                    <p>Last name: {{doctor.lastName}}</p>
+                    <p>Phone number: {{doctor.phoneNumber}}</p>
+                    <p>Email: {{doctor.email}}</p>
+                    <p>Address: {{doctor.address}}</p>
+                    <p>City: {{doctor.city}}</p>
+                    <p>Country: {{doctor.country}}</p>
+                    <!-- <button (click)="getDoctorById(doctor.id)">Show Info</button>
+                    <button (click)="onEditClicked(doctor.id)">Edit</button>
+                    <button (click)="deleteDoctorById(doctor.id)">Delete Doctor</button> -->
+                </div>  
+            </mat-card>
+        </div>
+    </div>
     

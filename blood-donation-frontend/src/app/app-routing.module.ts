@@ -24,6 +24,7 @@ const routes: Routes = [{
     {
       path:'Account',
       component: ProfileDoctorComponent,
+      canActivate : [AuthGuard]
     }
   ]
 },

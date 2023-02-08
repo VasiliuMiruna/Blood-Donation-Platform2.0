@@ -7,7 +7,7 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Interfaces
         Task Create(DoctorModel doctor);
         Task<List<DoctorModel>> GetAll();
         Task<DoctorModel> GetById(Guid id);
-
+        Task<DoctorModel> GetByUserId(string id);
         Task<bool> UpdateById(Guid id, DoctorModel doctor);
         Task<bool> DeleteDoctor(Guid id);
      

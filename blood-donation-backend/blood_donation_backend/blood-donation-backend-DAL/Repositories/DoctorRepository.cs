@@ -33,7 +33,12 @@ namespace blood_donation_backend.blood_donation_backend.DAL.Repositories
             return _db.Doctors.FirstOrDefault(d => d.DoctorId == id);  
 
         }
-        
+        public async Task<Doctor> GetByUserId(string id)
+        {
+            return _db.Doctors.FirstOrDefault(d => d.UserId == id);
+
+        }
+
 
         public async Task UpdateDoctor(Doctor doctor)
         {

@@ -64,7 +64,28 @@ namespace blood_donation_backend.blood_donation_backend.BLL.Services
                 FirstName = doctor.FirstName,
                 LastName = doctor.LastName,
                 Age = doctor.Age,
-                Salary = doctor.Salary
+                Salary = doctor.Salary,
+                UserId = doctor.UserId
+
+            };
+            return doctorModel;
+        }
+
+        public async Task<DoctorModel> GetByUserId(string id)
+        {
+            var doctor = await (_doctorRepository.GetByUserId(id));
+            if (doctor == null)
+            {
+                return null;
+            }
+            var doctorModel = new DoctorModel
+            {
+                Id = doctor.DoctorId,
+                FirstName = doctor.FirstName,
+                LastName = doctor.LastName,
+                Age = doctor.Age,
+                Salary = doctor.Salary,
+                UserId = doctor.UserId
 
             };
             return doctorModel;

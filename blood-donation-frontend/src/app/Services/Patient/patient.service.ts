@@ -4,7 +4,6 @@ import { Patient } from 'src/app/Models/Patient';
 import { User } from 'src/app/Models/User';
 
 
-
 @Injectable({
   providedIn: 'root'
 })

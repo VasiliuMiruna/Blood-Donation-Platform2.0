@@ -1,19 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 import { PatientService } from 'src/app/Services/Patient/patient.service';
 import { DoctorService } from 'src/app/Services/Doctor/doctor.service';
-import { Routes, RouterModule, TitleStrategy } from '@angular/router';
+import { Routes, RouterModule, TitleStrategy, Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ProfileDoctorComponent } from '../profile-doctor/profile-doctor.component';
 
-// const routes: Routes = [
-//   { path: '', redirectTo: 'login', pathMatch: 'full' },
-//   { path: 'register', component: RegisterComponent },
-// ];
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'Doctor', pathMatch: 'full' },
-  {path: 'Account', component: ProfileDoctorComponent}
+  { path: 'Account', component: ProfileDoctorComponent },
   // { path: 'add', component: CreatePatientComponent },
 ];
 
@@ -33,7 +29,7 @@ export class DashboardDoctorComponent {
   editMode:boolean = false
   currentPatientId : string
   @ViewChild('patientsForm') form: NgForm;
-  constructor(private patientService : PatientService, private doctorService:DoctorService) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private patientService : PatientService, private doctorService:DoctorService) {}
 
 //tot ce e aici se pune cand se incarca pg
 ngOnInit() {
@@ -112,6 +108,10 @@ ngOnInit() {
     this.doctorService.GetById(id).subscribe(()=> {
       this.ok = true
     })
+  }
+
+  navigateToProfile() {
+    this.router.navigate(['./' + '/Account'], {relativeTo: this.activatedRoute});
   }
 }
 
