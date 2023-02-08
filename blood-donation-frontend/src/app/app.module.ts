@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
 import { ProfileDoctorComponent } from './Pages/profile-doctor/profile-doctor.component';
 import { MatCardModule } from '@angular/material/card';
+import { SortPipePipe } from './pipes/sort-pipe.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { MatCardModule } from '@angular/material/card';
     DashboardPatientComponent,
     DashboardDonorComponent,
     DashboardAdminComponent,
-    ProfileDoctorComponent
+    ProfileDoctorComponent,
+    SortPipePipe
   ],
   imports: [
     BrowserModule,
